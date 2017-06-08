@@ -28,7 +28,6 @@ impl WordProblem {
             if command.is_empty() {
                 break;
             }
-            println!("{} '{}'", ans, command);
 
             let op = match Self::extract_op(&mut command) {
                 Some(op) => op,
