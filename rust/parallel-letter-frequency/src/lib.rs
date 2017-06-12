@@ -1,15 +1,13 @@
 use std::collections::HashMap;
 use std::thread;
-use std::sync::{Arc, Mutex};
+use std::sync::Arc;
 
 pub fn frequency(texts: &[&str], worker_count: usize) -> HashMap<char, usize> {
-    let map: Arc<Mutex<HashMap<char, usize>>> = Arc::new(Mutex::new(HashMap::new()));
     // TODO: get away with not copying the input
     let texts: Arc<Vec<_>> = Arc::new(texts.iter().map(|s| s.to_string()).collect::<_>());
     let mut children = vec![];
 
     for i in 0..worker_count {
-        let map = map.clone();
         let texts = texts.clone();
 
         children.push(thread::spawn(move || {
@@ -25,19 +23,17 @@ pub fn frequency(texts: &[&str], worker_count: usize) -> HashMap<char, usize> {
                 j += worker_count;
             }
 
-            let mut map = map.lock().unwrap();
-            for (c, n) in thread_map.iter() {
-                *map.entry(*c).or_insert(0) += *n;
-            }
+            thread_map
         }));
     }
 
+    let mut map: HashMap<char, usize> = HashMap::new();
     for t in children {
-        t.join().unwrap();
+        let thread_map = t.join().unwrap();
+        for (c, n) in thread_map.iter() {
+            *map.entry(*c).or_insert(0) += *n;
+        }
     }
 
-    // TODO: extract underlying hashmap instead of cloning it
-    // Arc::try_unwrap(map).unwrap().into_inner().unwrap()
-    let rs = map.lock().unwrap().clone();
-    rs
+    map
 }
