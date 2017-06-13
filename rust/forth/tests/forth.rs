@@ -8,7 +8,6 @@ fn no_input_no_stack() {
 }
 
 #[test]
-#[ignore]
 fn numbers_just_get_pushed_onto_the_stack() {
     let mut f = Forth::new();
     assert!(f.eval("1 2 3 4 5 -1").is_ok());
@@ -16,7 +15,6 @@ fn numbers_just_get_pushed_onto_the_stack() {
 }
 
 #[test]
-#[ignore]
 fn non_word_characters_are_separators() {
     let mut f = Forth::new();
     // Note the Ogham Space Mark ( ), this is a spacing character.
@@ -25,7 +23,6 @@ fn non_word_characters_are_separators() {
 }
 
 #[test]
-#[ignore]
 fn basic_arithmetic_1() {
     let mut f = Forth::new();
     assert!(f.eval("1 2 + 4 -").is_ok());
@@ -33,7 +30,6 @@ fn basic_arithmetic_1() {
 }
 
 #[test]
-#[ignore]
 fn basic_arithmetic_2() {
     let mut f = Forth::new();
     assert!(f.eval("2 4 * 3 /").is_ok());
@@ -41,7 +37,6 @@ fn basic_arithmetic_2() {
 }
 
 #[test]
-#[ignore]
 fn addition_error() {
     let mut f = Forth::new();
     assert_eq!(
@@ -51,7 +46,6 @@ fn addition_error() {
 }
 
 #[test]
-#[ignore]
 fn subtraction_error() {
     let mut f = Forth::new();
     assert_eq!(
@@ -61,7 +55,6 @@ fn subtraction_error() {
 }
 
 #[test]
-#[ignore]
 fn multiplication_error() {
     let mut f = Forth::new();
     assert_eq!(
@@ -71,7 +64,6 @@ fn multiplication_error() {
 }
 
 #[test]
-#[ignore]
 fn division_error() {
     let mut f = Forth::new();
     assert_eq!(
@@ -81,7 +73,6 @@ fn division_error() {
 }
 
 #[test]
-#[ignore]
 fn division_by_zero() {
     let mut f = Forth::new();
     assert_eq!(
@@ -91,7 +82,6 @@ fn division_by_zero() {
 }
 
 #[test]
-#[ignore]
 fn dup() {
     let mut f = Forth::new();
     assert!(f.eval("1 DUP").is_ok());
@@ -99,7 +89,6 @@ fn dup() {
 }
 
 #[test]
-#[ignore]
 fn dup_case_insensitive() {
     let mut f = Forth::new();
     assert!(f.eval("1 Dup").is_ok());
@@ -107,7 +96,6 @@ fn dup_case_insensitive() {
 }
 
 #[test]
-#[ignore]
 fn dup_error() {
     let mut f = Forth::new();
     assert_eq!(
@@ -117,7 +105,6 @@ fn dup_error() {
 }
 
 #[test]
-#[ignore]
 fn drop() {
     let mut f = Forth::new();
     assert!(f.eval("1 drop").is_ok());
@@ -125,7 +112,6 @@ fn drop() {
 }
 
 #[test]
-#[ignore]
 fn drop_with_two() {
     let mut f = Forth::new();
     assert!(f.eval("1 2 drop").is_ok());
@@ -133,7 +119,6 @@ fn drop_with_two() {
 }
 
 #[test]
-#[ignore]
 fn drop_error() {
     let mut f = Forth::new();
     assert_eq!(
@@ -143,7 +128,6 @@ fn drop_error() {
 }
 
 #[test]
-#[ignore]
 fn swap() {
     let mut f = Forth::new();
     assert!(f.eval("1 2 swap").is_ok());
@@ -151,7 +135,6 @@ fn swap() {
 }
 
 #[test]
-#[ignore]
 fn swap_with_three() {
     let mut f = Forth::new();
     assert!(f.eval("1 2 3 swap").is_ok());
@@ -159,7 +142,6 @@ fn swap_with_three() {
 }
 
 #[test]
-#[ignore]
 fn swap_error() {
     let mut f = Forth::new();
     assert_eq!(
@@ -173,7 +155,6 @@ fn swap_error() {
 }
 
 #[test]
-#[ignore]
 fn over() {
     let mut f = Forth::new();
     assert!(f.eval("1 2 over").is_ok());
@@ -181,7 +162,6 @@ fn over() {
 }
 
 #[test]
-#[ignore]
 fn over_with_three() {
     let mut f = Forth::new();
     assert!(f.eval("1 2 3 over").is_ok());
@@ -189,7 +169,6 @@ fn over_with_three() {
 }
 
 #[test]
-#[ignore]
 fn over_error() {
     let mut f = Forth::new();
     assert_eq!(
@@ -203,7 +182,6 @@ fn over_error() {
 }
 
 #[test]
-#[ignore]
 fn defining_a_new_word() {
     let mut f = Forth::new();
     assert!(f.eval(": CoUnT 1 2 3 ;").is_ok());
@@ -212,7 +190,6 @@ fn defining_a_new_word() {
 }
 
 #[test]
-#[ignore]
 fn redefining_an_existing_word() {
     let mut f = Forth::new();
     assert!(f.eval(": foo dup ;").is_ok());
@@ -222,7 +199,6 @@ fn redefining_an_existing_word() {
 }
 
 #[test]
-#[ignore]
 fn redefining_an_existing_built_in_word() {
     let mut f = Forth::new();
     assert!(f.eval(": swap dup ;").is_ok());
@@ -231,7 +207,6 @@ fn redefining_an_existing_built_in_word() {
 }
 
 #[test]
-#[ignore]
 fn defining_words_with_odd_characters() {
     let mut f = Forth::new();
     assert!(f.eval(": € 220371 ; €").is_ok());
@@ -239,7 +214,6 @@ fn defining_words_with_odd_characters() {
 }
 
 #[test]
-#[ignore]
 fn defining_a_number() {
     let mut f = Forth::new();
     assert_eq!(
@@ -249,7 +223,6 @@ fn defining_a_number() {
 }
 
 #[test]
-#[ignore]
 fn malformed_word_definition() {
     let mut f = Forth::new();
     assert_eq!(
@@ -267,7 +240,6 @@ fn malformed_word_definition() {
 }
 
 #[test]
-#[ignore]
 fn calling_non_existing_word() {
     let mut f = Forth::new();
     assert_eq!(
